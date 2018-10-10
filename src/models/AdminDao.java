@@ -1,5 +1,8 @@
 package models;
 
+import java.util.*;
+
+
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,4 +17,8 @@ public class AdminDao {
 	
 	@Autowired
 	SqlSessionTemplate template;
+	
+	public List<Map> admindepart(){
+		return template.selectList("adminadd.admindepart");
+	}
 }

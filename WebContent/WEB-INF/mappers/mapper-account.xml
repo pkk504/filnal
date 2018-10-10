@@ -3,8 +3,12 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="account">
-		<select id ="getidpass" resultType="java.util.HashMap" parameterType="java.lang.String">
+<mapper namespace="adminadd">
+
+<select id="admindepart" resultType="java.util.HashMap">
+select * from department
+</select>
+	<!-- 	<select id ="getidpass" resultType="java.util.HashMap" parameterType="java.lang.String">
 		 select id,pass from account where id like #{id}
 	</select>
 	
@@ -24,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from account
 	</select>
 	
-	<!--  ======================================================== -->
+	 ========================================================
 	<insert id="addissu" parameterType="java.util.HashMap">
 	insert into issue values(issue_seq.nextval,#{cate},#{content},#{agree},#{disagree},#{writer},sysdate)
 </insert>
@@ -47,7 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id ="getnoopi" resultType="java.util.HashMap" parameterType="java.lang.String">
 		select * from opinion where ino like #{no} order by aadate desc
 	</select>
-	<!--  =================================================================================================================================================-->
+	 =================================================================================================================================================
 	
 	<select id ="gethotissue" resultType="java.util.HashMap">
 	select * from issue left join (select ino,sum(choice)as r from opinion group by ino order by r desc)tt on issue.no=tt.ino  where rownum &lt;=3
@@ -58,9 +62,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</select>
 	
-	<!-- <select id ="getMycoment" resultType="java.util.HashMap" parameterType="java.lang.String">
+	<select id ="getMycoment" resultType="java.util.HashMap" parameterType="java.lang.String">
 	   select distinct * from  (opinion full outer join issue on opinion.ino =issue.no) where opinion.talker=#{id} order by aadate desc
-	</select> -->
+	</select>
 	<select id ="getMycoment" resultType="java.util.HashMap" parameterType="java.lang.String">
 	   select distinct * from (select distinct * from  (opinion full outer join issue on opinion.ino =issue.no) where opinion.talker=#{id} order by aadate desc)where rownum &lt;=3
 	</select>
@@ -78,7 +82,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id ="getcateissue" resultType="java.util.HashMap" parameterType="java.lang.String">
 	   select * from issue where cate=#{ad} order by regdate desc
-	</select>
+	</select> -->
 	
 	
 
