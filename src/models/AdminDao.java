@@ -21,4 +21,17 @@ public class AdminDao {
 	public List<Map> admindepart(){
 		return template.selectList("adminadd.admindepart");
 	}
+	
+	public List<Map> adminposition(){
+		return template.selectList("adminadd.adminposition");
+	}
+	
+	public int Idseq() {
+		return template.selectOne("adminadd.getSequenceVal");
+		
+	}
+	
+	public int addadmin(Map map) {
+		return template.insert("adminadd.addadminn",map);
+	}
 }

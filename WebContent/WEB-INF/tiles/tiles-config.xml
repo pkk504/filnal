@@ -14,5 +14,17 @@
 		<put-attribute name="left" value="/WEB-INF/views/admin/side.jsp"/>
 			 <put-attribute name="center" value="/WEB-INF/views/admin/addEmployee.jsp"/> 
 	</definition>
+	
+	<definition name="success" template="/WEB-INF/tiles/admin_template.jsp">
+	<put-attribute name="nav" value="/WEB-INF/views/admin/nav.jsp"/>
+		<put-attribute name="left" value="/WEB-INF/views/admin/side.jsp"/>
+			 <put-attribute name="center" value="/WEB-INF/views/admin/success.jsp"/> 
+	</definition>
+	
+		<definition name="fail" template="/WEB-INF/tiles/admin_template.jsp">
+	<put-attribute name="nav" value="/WEB-INF/views/admin/nav.jsp"/>
+		<put-attribute name="left" value="/WEB-INF/views/admin/side.jsp"/>
+			 <put-attribute name="center" value="/WEB-INF/views/admin/fail.jsp"/> 
+	</definition>
 
 </tiles-definitions>

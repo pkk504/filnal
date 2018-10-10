@@ -8,6 +8,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="admindepart" resultType="java.util.HashMap">
 select * from department
 </select>
+
+<select id="adminposition" resultType="java.util.HashMap">
+select*from position
+</select>
+
+  <select id="getSequenceVal" resultType="java.lang.Integer" >
+         select employee_seq.nextval from dual
+      </select>
+      
+      <insert id="addadminn" parameterType="java.util.HashMap" >
+      	insert into employee values(#{id}, '1111', #{name}, #{did}, #{pid}, #{joindate} )
+      </insert>
 	<!-- 	<select id ="getidpass" resultType="java.util.HashMap" parameterType="java.lang.String">
 		 select id,pass from account where id like #{id}
 	</select>
