@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!-- 
+		DispatcherServlet이 요청을 받아서 이 설정파일에 등록된 빈(스프링에 의해서 관리되는 객체)
+		들을 통해서	요청을 처리하거나 응답을 만들어내게 된다.
+		
+		기본적으로 등록해서 사용해야되는게
+		HandlerMapping  - 필수
+			: DispatcherServlet으로 들어온 요청을 컨트롤러와 어떤식으로 Mapping 할껀지 결정하는  
+		ViewResolver - 필수
+			: 컨트롤러에서 처리되며 리턴되는 뷰를 어떤식으로 해석해야되는지 결정하는 
+		
+		HandlerAdapter - 선택
+			: Mapping 된 컨트롤러 처리할때 필요한 작업을 설정하는
+		HandlerExceptionResolver - 선택
+			: 익셉션을 어떤식으로 처리할껀지 설정하는
+		MultipartResolver - 선택
+			: 멀티파트요청을 parsing 할때 사용할 라이브러리를 설정하는 
+	 -->
+	<!-- 
+		HandlerMapping configuration
+		: 등록할수 있는 HandlerMapping용 빈들은 여러가지가 있지만,
+		  Spring3 버전대부터는 거의 RequestMappingHanlderMapping 빈을 이용해서 처리한다.
+	      이 방식으로 연동되게 하는 컨트롤러가 Spring의 DI 기능을 활용할수 있기 때문에.
+	-->
+	<bean id="handlerMapping" 
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+	<!-- controller registration  -->
+	<context:component-scan base-package="controllers"/>	
+	<!-- 
+		<bean id="indexController" class="controllers.IndexController"/>
+		이 Controller가 scan 대상에 포함이기 때문에 따로 등록안해도 된다.
+	-->
+	<!-- viewResolver configuration -->
+	
+	<bean id ="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/>
+	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions" value="/WEB-INF/tiles/tiles-config.xml"></property>
+	</bean>
+	
+	
+	
+	
+	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/"/>
+		<property name="suffix" value=".jsp"/>	
+	</bean>
+	
+	
+	
+	
+	
+	
+	<!-- injecting bean register / 기본생성자로 생성시켜 관리에 들어가게 된다.-->
+	<bean id="gson" class="com.google.gson.Gson"/>	
+	<bean id="adminDao" class="models.AdminDao"/> 
+	<!-- injecting bean register / 
+			생성시켜서 어느정도 설정을 잡아두고 Inject를 받아 써야되는 객체가 있다.
+		그럴 경우 해당객체가 set(XXXXXX) 계열로 설정을 잡을수 있다면, 이건 property 로 설정해서
+		등록시켜둘수 있다.
+		String을 포함한 기본밸류형태들은 value 로 설정을 할수 있고,
+		객체로 value로 설정을 해야 된다면, ref 라는걸로 설정을 할수 있다. 	
+	-->
+	<bean id="grid" class="java.awt.GridLayout">
+		<property name="columns" value="2"/>
+		<property name="rows" value="3"/>
+	</bean>
+	
+	
+	<bean id="frame1" class="javax.swing.JFrame">
+		<property name="title" value="Spring Inject"/>
+		<property name="alwaysOnTop" value="true"/>
+		<property name="layout" ref="grid"></property>
+	</bean>
+<bean id="frame2" class="javax.swing.JFrame">
+		<property name="title" value="injection"/>
+		<property name="layout" ref="grid"/>
+	</bean>
+	
+	<!--  
+		밑에는 mybatis bridge register
+	-->
+	 <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@54.180.8.152:1521:xe"/>
+		<property name="username" value="dev"/>
+		<property name="password" value="alcls504"/>
+		
+	</bean>
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="ds"/>
+		<property name="mapperLocations" value="/WEB-INF/mappers/*.xml"/>
+	</bean>
+	
+	<bean id="sqlTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		
+	</bean> 
+	
+	<!-- <bean id="IsuueRepository" class="models.IsuueRepository"/> -->
+	
+	
+	
+	
+	<!-- multipart resolver add (id는 꼭  multipartResolver로 설정) -->
+	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		id="multipartResolver"/>
+	
+	
+	<!-- Tiles Library -->
+	
+	
+	
+	
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

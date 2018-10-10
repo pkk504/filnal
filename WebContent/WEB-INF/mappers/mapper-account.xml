@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper  
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="account">
+		<select id ="getidpass" resultType="java.util.HashMap" parameterType="java.lang.String">
+		 select id,pass from account where id like #{id}
+	</select>
+	
+		<select id ="getidname" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select id,name from account where id like #{id}
+	</select>
+	
+	<insert id="addaccount" parameterType="java.util.HashMap">
+	insert into account values(#{id},#{pass},#{name},#{gender})
+</insert>
+
+<select id ="getname" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select id,name from account where id like #{name}
+	</select>
+	
+	<select id ="getall" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select * from account
+	</select>
+	
+	<!--  ======================================================== -->
+	<insert id="addissu" parameterType="java.util.HashMap">
+	insert into issue values(issue_seq.nextval,#{cate},#{content},#{agree},#{disagree},#{writer},sysdate)
+</insert>
+<select id ="getAllissue" resultType="java.util.HashMap">
+		  select issue.*, nvl(tt.r,0) as r from issue left join (select ino,count(*)as r from opinion group by ino )tt on issue.no=tt.ino order by regdate desc
+	</select>
+	
+	<select id ="getnofrom" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select * from issue where no like #{no}
+	</select>
+	
+	<insert id="addcoment" parameterType="java.util.HashMap">
+	insert into opinion values(opinion_seq.nextval,#{choice},#{ment},#{talker},#{ino},sysdate)
+</insert>
+
+<select id ="getAllcoment" resultType="java.util.HashMap">
+		select * from opinion order by aadate desc
+	</select>
+	
+	<select id ="getnoopi" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select * from opinion where ino like #{no} order by aadate desc
+	</select>
+	<!--  =================================================================================================================================================-->
+	
+	<select id ="gethotissue" resultType="java.util.HashMap">
+	select * from issue left join (select ino,sum(choice)as r from opinion group by ino order by r desc)tt on issue.no=tt.ino  where rownum &lt;=3
+	
+	</select>
+	<select id="getdateissue" resultType="java.util.HashMap">
+		  select * from (select *from issue where sysdate-regdate &lt;=1 order by regdate desc)where rownum &lt;=3
+	
+	</select>
+	
+	<!-- <select id ="getMycoment" resultType="java.util.HashMap" parameterType="java.lang.String">
+	   select distinct * from  (opinion full outer join issue on opinion.ino =issue.no) where opinion.talker=#{id} order by aadate desc
+	</select> -->
+	<select id ="getMycoment" resultType="java.util.HashMap" parameterType="java.lang.String">
+	   select distinct * from (select distinct * from  (opinion full outer join issue on opinion.ino =issue.no) where opinion.talker=#{id} order by aadate desc)where rownum &lt;=3
+	</select>
+	
+	<select id ="getchoice" resultType="java.util.HashMap" parameterType="java.lang.String">
+	  select choice, count(*) as cnt from OPINION where ino=#{ino} group by choice
+	</select>
+	
+	<select id ="getchoice11" resultType="java.util.HashMap" parameterType="java.lang.String">
+	          select 'y' as choice, count(*) as cnt from opinion where ino=#{ino} and choice=1 union select 'n' as choice, count(*) as cnt from opinion where ino=#{ino} and choice=0
+	</select>
+	
+		<select id ="getissuemoum" resultType="java.util.HashMap" >
+	          select cate.*, nvl(t1.cnt,0) as cnt from  cate left join  (select cate, count(*) as cnt from issue group by cate)t1 on cate.catego=t1.cate
+	</select>
+	<select id ="getcateissue" resultType="java.util.HashMap" parameterType="java.lang.String">
+	   select * from issue where cate=#{ad} order by regdate desc
+	</select>
+	
+	
+
+
+	
+
+
+</mapper>
