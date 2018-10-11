@@ -32,6 +32,11 @@ public class AdminDao {
 	}
 	
 	public int addadmin(Map map) {
-		return template.insert("adminadd.addadminn",map);
+		int r =template.insert("adminadd.addadminn",map);
+		if(r==1) {
+			return r;
+		}else {
+			return -1;
+		}
 	}
 }

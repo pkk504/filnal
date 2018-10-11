@@ -130,6 +130,14 @@
     <version>3.0.8</version>
 </dependency>
 
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-websocket</artifactId>
+    <version>5.1.0.RELEASE</version>
+</dependency>
+
+
 
 
 
