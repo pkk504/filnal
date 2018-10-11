@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,10 +16,17 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+
+
 <title>관리자 - 그룹웨어</title>
 <body class="text-center">
 	<form class="form-signin" method="post"
-		action="${pageContext.servletContext.contextPath }/index.do">
+		action="${pageContext.servletContext.contextPath }/login.do">
+		<c:if test="${!empty err }">
+<div class="alert alert-danger" role="alert">
+ 맞지않은 ID 나 PASSWORD 입니다.
+</div>
+</c:if>
 		<img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt=""
 			width="72" height="72">
 		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>

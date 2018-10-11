@@ -1,87 +1,59 @@
 package controllers;
 
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.WebRequest;
 
 import models.AdminDao;
 
-@WebServlet("/index.do")
+@Controller
 public class IndexController extends HttpServlet{
 
 	@Autowired
 	AdminDao adminDao;
 	
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session= req.getSession();
-		if(session.getAttribute("auth")==null) {
-			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/admin/index.jsp");
-			rd.forward(req, resp);
-		}else{
-			resp.sendRedirect(req.getContextPath()+"/employee/add.do");
-		}
+	@GetMapping("index.do")
+	public String indexgetHandl(WebRequest wr) {
 		
-	}
-	
-	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session= req.getSession();
-		System.out.println(req.getParameter("id"));
-		System.out.println(req.getParameter("pass"));
-		String id=req.getParameter("id");
-		String pass=req.getParameter("pass");
-		Map map =new HashMap();
-		map.put("ID", id);
-		map.put("PASS", pass);
-		List<Map> li=adminDao.selectIdPass(map);
-		
-		
-		for(int i=0;i<li.size();i++) {
-			Map qq=li.get(i);
-			System.out.println(qq.get("ID"));
-		}
-		
-		if(req.getParameter("id")!=null&&req.getParameter("pass")!=null) {
-		
-		if(adminDao.selectIdPass(map)!=null) {
-			resp.sendRedirect(req.getContextPath()+"/index.do");
-		}else if(adminDao.selectIdPass(map)==null){
-			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/admin/index.jsp");
-			rd.forward(req, resp);
-		}
+		if(wr.getAttribute("auth", WebRequest.SCOPE_SESSION)==null) {
+		return "admin/index"; 
 		}else {
-			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/admin/index.jsp");
-			rd.forward(req, resp);
+			return "main";
 		}
 		
 	}
 	
-	/*@GetMapping("index.do")
-	public String indexgetHandle(WebRequest wr) {
+	@PostMapping("login.do")
+	public String indexgetHandl(@RequestParam Map map,WebRequest wr) {
+		Map mapp=adminDao.selectIdPass(map);
+		String id=wr.getParameter("id");
+		String pass=wr.getParameter("pass");
+		wr.removeAttribute("user", wr.SCOPE_SESSION);
+		Map qq=new HashMap();
+		qq.remove("id");
+		qq.remove("pass");
+		qq.put("id", id);
+		qq.put("pass", pass);
 		
-		if(wr.getAttribute("auth", wr.SCOPE_SESSION)==null) {
-		return "/index.jsp";
+		
+		if(mapp!=null) {
+		/*wr.setAttribute("user", map, wr.SCOPE_SESSION);*/
+		wr.setAttribute("user",qq , wr.SCOPE_SESSION);
+			wr.setAttribute("auth", true, WebRequest.SCOPE_SESSION);
+			return "redirect:index.do";
 		}else {
-			return "redirect:employee/add.do";
+			/*return "redirect:index.do"; */
+			wr.setAttribute("err", true, WebRequest.SCOPE_REQUEST);
+			return "admin/index"; 
 		}
 	}
-	
-	@PostMapping("index.do")
-	public String indexpostHandle() {
-		return "";
-	}*/
 	
 }

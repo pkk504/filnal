@@ -40,9 +40,9 @@ public class AdminDao {
 		}
 	}
 	
-	public List<Map> selectIdPass(Map map) {
-		if(template.selectList("adminadd.selectIdPass",map)!=null) {
-			return template.selectList("adminadd.selectIdPass",map);
+	public Map selectIdPass(Map map) {
+		if(template.selectOne("adminadd.selectIdPass",map)!=null) {
+			return template.selectOne("adminadd.selectIdPass",map);
 		}else {
 			return null;
 		}

@@ -2,7 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	<!-- 
 		DispatcherServlet이 요청을 받아서 이 설정파일에 등록된 빈(스프링에 의해서 관리되는 객체)
@@ -30,7 +32,9 @@
 	<bean id="handlerMapping" 
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
 	<!-- controller registration  -->
-	<context:component-scan base-package="controllers"/>	
+	<context:component-scan base-package="controllers"/>
+	<context:component-scan base-package="models"/>		
+	
 	<!-- 
 		<bean id="indexController" class="controllers.IndexController"/>
 		이 Controller가 scan 대상에 포함이기 때문에 따로 등록안해도 된다.
@@ -113,7 +117,11 @@
 	
 	
 	<!-- Tiles Library -->
-	
+
+	<websocket:handlers>
+		<websocket:mapping handler="alertController" path="/alert.do"/>
+	</websocket:handlers>
+	  
 	
 	
 	
