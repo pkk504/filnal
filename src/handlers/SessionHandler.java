@@ -9,29 +9,30 @@ import javax.servlet.http.HttpSessionListener;
 
 /*
  * ServletContextListener/
- * 	ServletContextAttributeListener°¡ ServletContext¿¡ °ü·ÃµÈ ÀÌº¥Æ® ¸®½º³Ê ¿´´Ù¸é,
+ * 	ServletContextAttributeListenerï¿½ï¿½ ServletContextï¿½ï¿½ ï¿½ï¿½ï¿½Ãµï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½,
  * 
- * HttpSession¿¡ °ü·ÃµÈ ÀÌº¥Æ® ¸®½º³Ê¸¦ »ìÆìº¸·Á°í ÇÏ´Âµ¥
- * 	-HttpSessionListener : SessionÀÌ ¸¸µé¾îÁö°í, ÆÄ±«µÉ¶§ÀÇ ÀÌº¥Æ® °¨Áö±â
- * 	-HttpSessionAttributeListener : Session¿¡ attributeÀÇ º¯È­°¡ ÀÏ¾î³¯¶§ÀÇ ÀÌº¥Æ® °¨Áö±â
+ * HttpSessionï¿½ï¿½ ï¿½ï¿½ï¿½Ãµï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½Ê¸ï¿½ ï¿½ï¿½ï¿½ìº¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´Âµï¿½
+ * 	-HttpSessionListener : Sessionï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½Ä±ï¿½ï¿½É¶ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * 	-HttpSessionAttributeListener : Sessionï¿½ï¿½ attributeï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½ ï¿½Ï¾î³¯ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * 
  */
 
 public class SessionHandler implements HttpSessionListener{
 	
 	
-	/*public void sessionCreated(HttpSessionEvent se) {
-		//»õ·Î¿î ¼¼¼ÇÀÌ ¿­¸±¶§ ÀÛµ¿.. ¼¼¼ÇÀ» °®Áö ¾Ê´Â »ç¿ëÀÚÀÇ ÃÖÃÊ ¿¬°á½Ã ÀÛµ¿
+	public void sessionCreated(HttpSessionEvent se) {
+		//ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ûµï¿½.. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ûµï¿½
 		HttpSession session=se.getSession();
 		System.out.println("[Session] created.."+session.getId());
-		session.setAttribute("auth", false);
+		/*session.setAttribute("auth", true);*/
 		ServletContext ctx = session.getServletContext();
-	}*/
+		
+	}
 	
 /*	@Override
 	public void sessionDestroyed(HttpSessionEvent se) {
-		// ÀÌ¹Ì ±âÁ¸¿¡ ¸¸µé¾îÁø ¼¼¼ÇÀÌ ´ÝÈú¶§ ÀÛµ¿...
-		// À¯È¿½Ã°£³» °»½ÅµÇÁö ¾Ê°Å³ª, invalidate() ½ÃÅ°¸é ÀÛµ¿µÈ´Ù.
+		// ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ûµï¿½...
+		// ï¿½ï¿½È¿ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Åµï¿½ï¿½ï¿½ ï¿½Ê°Å³ï¿½, invalidate() ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Ûµï¿½ï¿½È´ï¿½.
 		HttpSession session = se.getSession();
 		session.removeAttribute("set");
 		
@@ -42,7 +43,7 @@ public class SessionHandler implements HttpSessionListener{
 	
 	/*public void sessionDestroyed(HttpSessionEvent se) {
 		HttpSession session  = se.getSession();
-		ServletContext application =session.getServletContext();//application À» °¡Á®¿À´Â°ÅÀÓ.
+		ServletContext application =session.getServletContext();//application ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â°ï¿½ï¿½ï¿½.
 		Set<String> set =(Set)application.getAttribute("users");
 		String id = (String)session.getAttribute("loginid");
 		set.remove(id);

@@ -9,14 +9,14 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 /*
- * application Event¿ë Listener 2°³ 
+ * application Eventï¿½ï¿½ Listener 2ï¿½ï¿½ 
  *  
  *  - ServletContextListener: init, destroy
  *  
  *  - ServletContextAttributeListener : setAttribute, removeAttribute
  *  
  *  
- *  # ¸ðµç ¸®½º³Ê´Â µî·ÏÀÌ ÇÊ¿äÇÔ.(¾Ë¾Æ¼­ °¨ÁöµÇÁö ¾Ê´Â´Ù.)(web.xml È®ÀÎ)
+ *  # ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ê´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½.(ï¿½Ë¾Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.)(web.xml È®ï¿½ï¿½)
  */
 
 
@@ -24,7 +24,7 @@ public class ApplicationHandler implements ServletContextListener{
 long begin;
 Date i1;
 @Override
-public void contextInitialized(ServletContextEvent sce) {//¸¸µé¾îÁú¶§
+public void contextInitialized(ServletContextEvent sce) {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	   try {
 		 	Class.forName("oracle.jdbc.driver.OracleDriver");
 		   } catch(Exception e) {
@@ -38,18 +38,19 @@ public void contextInitialized(ServletContextEvent sce) {//¸¸µé¾îÁú¶§
 	//System.out.println(i1);
 	
 	/*
-	 * ¸Å°³º¯¼ö·Î ÀâÇôÀÖ´Â ServletContextEvent¸¦ ÅëÇØ¼­
-	 * applicationÀ» Á¢±ÙÇÒ¼ö ÀÖ´Ù.
+	 * ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ServletContextEventï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½
+	 * applicationï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½ ï¿½Ö´ï¿½.
 	 */
 	ServletContext ctx=sce.getServletContext();
 	ctx.setAttribute("newline", "\n");
+	ctx.setAttribute("auth", true);
 	
 	
 	
-	//JSP¿¡¼­ »ç¿ëµÇ´Â application ÀÌ¶ó´Â ÀÌ¸§ÀÇ °´Ã¼.
+	//JSPï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç´ï¿½ application ï¿½Ì¶ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼.
 
-	ctx.setRequestCharacterEncoding("UTF-8"); // Listener¿¡¼­¸¸ °¡´É
-											//ServletÇÏÀ§¹öÀü¿¡´Â ¾ø´Â ¸Þ¼­µå
+	ctx.setRequestCharacterEncoding("UTF-8"); // Listenerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+											//Servletï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	/*ctx.setSessionTimeout(1);*/
 	
 

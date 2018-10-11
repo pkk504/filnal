@@ -20,6 +20,10 @@ select*from position
       <insert id="addadminn" parameterType="java.util.HashMap" >
       	insert into employee values(#{id}, '1111', #{name}, #{did}, #{pid}, #{joindate} )
       </insert>
+      
+      <select id="selectIdPass" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+     select * from employee where id=#{id} and pass=#{pass}
+      </select>
 	<!-- 	<select id ="getidpass" resultType="java.util.HashMap" parameterType="java.lang.String">
 		 select id,pass from account where id like #{id}
 	</select>
