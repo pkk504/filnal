@@ -18,6 +18,8 @@ public class AdminDao {
 	@Autowired
 	SqlSessionTemplate template;
 	
+	
+	
 	public List<Map> admindepart(){
 		return template.selectList("adminadd.admindepart");
 	}

@@ -24,6 +24,10 @@ select*from position
       <select id="selectIdPass" parameterType="java.util.HashMap" resultType="java.util.HashMap">
      select * from employee where id=#{id} and pass=#{pass}
       </select>
+      
+      <update id="setPass" parameterType="java.lang.String" >
+       update employee set pass = #{pass1} where id=#{id};  
+      </update>
 	<!-- 	<select id ="getidpass" resultType="java.util.HashMap" parameterType="java.lang.String">
 		 select id,pass from account where id like #{id}
 	</select>

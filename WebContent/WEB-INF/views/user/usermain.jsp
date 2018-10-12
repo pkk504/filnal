@@ -32,20 +32,21 @@
 	var ws = new WebSocket("ws://"+ location.host +"${pageContext.servletContext.contextPath}/alert.do");
 	var obj="";
 	var html="";
+	var data="";
 	ws.onmessage =function(evt){ //매개변수성정하면
 			//받은 메세지에 관련된 객체를 넘겨주면서 콜이 일어나고,
 			/* console.log(evt);
 			console.log(evt.data);//서버측에서 전송시킨 메세지 내용 */
-			
+			console.log(evt.data);
 			 obj=JSON.parse(evt.data);
 			console.log(obj.mode);
 			var aa="";
-			var data={"ID" : "${user.id}"};
+			data={"ID" : "${user.id}"};
 		 	switch(obj.mode){
 			case  "welcome" : ws.send(JSON.stringify(data)); 
 				break;
 			/*  case  "login" : window.alert(obj.ID+" 님이 접속하셨습니다.") */
-			case "login" :html+="<li>"+obj.ID+"님이 접속하셨습니다.</li>";
+			case "login" :html+="<li>"+obj.ACTOR+"님이 접속하셨습니다.</li>";
 				document.getElementById("abc").innerHTML=html;
 								
 			 break; 

@@ -120,10 +120,12 @@
 
 	<websocket:handlers>
 		<websocket:mapping handler="alertController" path="/alert.do"/>
+		<websocket:handshake-interceptors>
+			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
+	
+	
 	</websocket:handlers>
-	  
-	
-	
 	
 </beans>
 

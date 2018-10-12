@@ -28,9 +28,9 @@
 	</definition>
 	
 	<definition name="main" template="/WEB-INF/tiles/user_template.jsp">
-	<put-attribute name="usernav" value="/WEB-INF/views/admin/usernav.jsp"/>
-		<put-attribute name="left" value="/WEB-INF/views/admin/userside.jsp"/>
-			 <put-attribute name="center" value="/WEB-INF/views/admin/usermain.jsp"/> 
+	<put-attribute name="usernav" value="/WEB-INF/views/user/usernav.jsp"/>
+		<put-attribute name="left" value="/WEB-INF/views/user/userside.jsp"/>
+			 <put-attribute name="center" value="/WEB-INF/views/user/usermain.jsp"/> 
 	</definition>
 
 </tiles-definitions>

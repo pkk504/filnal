@@ -77,7 +77,6 @@ import com.google.gson.Gson;
 
 
 @Service
-
 public class AlertService {
 	List<WebSocketSession> list;
 	
@@ -110,10 +109,59 @@ public class AlertService {
 			}
 		}
 	}
+	public void sendOne(String txt,String target) {
+		TextMessage msg = new TextMessage(txt);
+		for(int i=0; i<list.size(); i++) {
+			WebSocketSession ws=list.get(i);
+			String userId =(String)ws.getAttributes().get("userId");
+			if(userId.equals(target)) {
+				try {
+					ws.sendMessage(msg);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		
+		}
+	}
+	
+/*	public void sendSome(String txt,String... target) {
+		TextMessage msg = new TextMessage(txt);
+		for(int i=0; i<list.size(); i++) {
+			WebSocketSession ws=list.get(i);
+			String userId =(String)ws.getAttributes().get("userId");
+			if(userId.equals(target)) {
+				try {
+					ws.sendMessage(msg);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		
+		}
+	}*/
+	
+	
+	
+	
 	
 	public void sendAll(Map map) {
 		sendAll(gson.toJson(map));
 	}
+	public void sendOne(Map map,String target) {
+		sendOne(gson.toJson(map),target);
+	}
+	
+	
+	/*public void sendSome(Map map) {
+		sendSome(gson.toJson(map));
+	}
+	*/
+	
 }
 
 
