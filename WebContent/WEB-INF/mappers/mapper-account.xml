@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 select * from department
 </select>
 
-<select id="adminposition" resultType="java.util.HashMap">
+<select id="adminposition" resultType="java.util.HashMap" >
 select*from position
 </select>
 
@@ -25,9 +25,28 @@ select*from position
      select * from employee where id=#{id} and pass=#{pass}
       </select>
       
-      <update id="setPass" parameterType="java.lang.String" >
-       update employee set pass = #{pass1} where id=#{id};  
+      <update id="setPass" parameterType="java.util.HashMap"  >
+       update employee set pass = #{pass1} where id=#{id}  
       </update>
+      
+      
+      <insert id="addmessage" parameterType="java.util.HashMap" >
+      	insert into finalmessage values(message_seq.nextval, #{sender}, #{receiveid}, #{content}, 0, sysdate )
+      </insert>
+      
+      <select id="receiveAll" parameterType="java.lang.String" resultType="java.util.HashMap">
+       select * from finalmessage where receiver = #{id} order by senddate desc
+      </select>
+      
+      <select id="receivemsg" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+       select * from finalmessage where no = #{no} 
+      </select>
+      
+      <update id="setchoice" parameterType="java.lang.Integer"  >
+       update finalmessage set choice = 1 where no=#{no}  
+      </update>
+      
+      
 	<!-- 	<select id ="getidpass" resultType="java.util.HashMap" parameterType="java.lang.String">
 		 select id,pass from account where id like #{id}
 	</select>

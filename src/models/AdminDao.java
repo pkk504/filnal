@@ -50,4 +50,31 @@ public class AdminDao {
 		}
 	}
 	
+	public int setPass(Map map) {
+		return template.update("adminadd.setPass",map);
+	}
+	
+	public int addaddmessage(Map map) {
+		int r =template.insert("adminadd.addmessage",map);
+		if(r==1) {
+			return r;
+		}else {
+			return -1;
+		}
+	}
+	
+	public List<Map> receiveAll(String param){
+		return template.selectList("adminadd.receiveAll",param);
+	}
+	
+	public Map receivemsg(int num) {
+		return template.selectOne("adminadd.receivemsg",num);
+		
+	}
+	
+	public int setchoice (int no) {
+		return template.selectOne("adminadd.setchoice",no);
+	}
+	
+	
 }

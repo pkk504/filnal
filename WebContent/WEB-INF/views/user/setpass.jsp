@@ -21,7 +21,7 @@
 <title>관리자 - 그룹웨어</title>
 <body class="text-center">
 	<form class="form-signin" method="post"
-		action="${pageContext.servletContext.contextPath }/setpass.do">
+		action="${pageContext.servletContext.contextPath }/setpass.do" >
 		<c:if test="${!empty errpass }">
 <div class="alert alert-danger" role="alert">
  맞지않는 PASSWORD 입니다.
@@ -32,19 +32,19 @@
 		<h1 class="h3 mb-3 font-weight-normal">비밀번호 변경</h1>
 		
 		
-		<label for="inputPassword" class="sr-only">pass</label> 
+		<!-- <label for="inputPassword" class="sr-only">pass</label> 
 		<input type="password" id="inputEmail" class="form-control"
 			placeholder="Nowpassword" required autofocus name="pass">
-			<br/><br/>
+			<br/><br/> -->
 			
 			
 		<label for="inputPassword" class="sr-only">pass</label> 
 		<input type="password" id="inputEmail" class="form-control"
-			placeholder="Setpassword" required autofocus name="pass1"> 
+			placeholder="변경할 패스워드" required autofocus name="pass1"> 
 			
 			<label for="inputPassword" class="sr-only">Password</label> 
 			<input type="password" id="inputPassword" class="form-control"
-			placeholder="RePassword" required name="pass2">
+			placeholder="변경할 패스워드 확인" required name="pass2">
 		<!-- <div class="checkbox mb-3">
 			<label> <input type="checkbox" value="remember-me">
 				Remember me
