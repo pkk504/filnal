@@ -56,6 +56,10 @@ public class ChatSocketcontroller extends TextWebSocketHandler{
 			
 			Map mapp=new HashMap();
 			service.list.get(i).getAttributes().get("user");
+			for(int ii=0;ii<sockets.size();ii++) {
+				sockets.get(ii).getAttributes().get("userId");
+				System.out.println(sockets.get(ii).getAttributes().get("userId"));
+			}
 			System.out.println("호로록="+service.list.get(i).getAttributes().get("userId"));
 		
 		}
