@@ -50,10 +50,16 @@ public class ChatSocketcontroller extends TextWebSocketHandler{
 	}
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		for(int i=0; i<service.size();i++) {
+		
+		
+		for(int i=0; i<service.list.size();i++) {
+			
 			Map mapp=new HashMap();
+			service.list.get(i).getAttributes().get("user");
+			System.out.println("호로록="+service.list.get(i).getAttributes().get("userId"));
 		
 		}
+		
 		String got=message.getPayload();
 		Map aa=gson.fromJson(got, Map.class);
 		Date time =new Date(System.currentTimeMillis());

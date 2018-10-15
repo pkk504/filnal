@@ -78,13 +78,15 @@ import com.google.gson.Gson;
 
 @Service
 public class AlertService {
-	List<WebSocketSession> list;
+	public List<WebSocketSession> list;
 	
 	@Autowired
 	Gson gson;
 	
+	
 	public AlertService() {
 		list = new ArrayList<>();
+		
 	}
 	
 	public int size() {
@@ -160,8 +162,8 @@ public class AlertService {
 	}
 	
 	
-	public void sendSome(Map map,String...targer) {
-		sendSome(gson.toJson(map));
+	public void sendSome(Map map,String...target) {
+		sendSome(gson.toJson(map),target);
 	}
 	
 	
