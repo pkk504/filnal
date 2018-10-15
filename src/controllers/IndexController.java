@@ -52,7 +52,7 @@ public class IndexController extends HttpServlet{
 		Map mapp=adminDao.selectIdPass(map);
 		String id=wr.getParameter("id");
 		String pass=wr.getParameter("pass");
-		System.out.println("id´Ù "+id);
+		System.out.println("idï¿½ï¿½ "+id);
 		wr.setAttribute("userId",id , wr.SCOPE_SESSION);
 		Map qq=new HashMap();
 		qq.remove("id");
@@ -68,11 +68,22 @@ public class IndexController extends HttpServlet{
 			msgg.put("mode", "erlogin");
 			msgg.put("actor", id);
 			
+			Map msg=new HashMap<>();
+			msg.put("mode","login");
+			msg.put("actor", mapp);
+			
 			if(sessions.containsKey(id)) {
 				sessions.get(id).invalidate();
+				sessions.remove(id);
+				
+				
+				service.sendOne(msgg, id);
 			}
 			sessions.put(id,session);
-			service.sendOne(msgg, id);
+			service.sendAll(msg);
+			
+			/*service.sendOne(msgg, id);*/
+			
 			
 			//======================
 		/*wr.setAttribute("user", map, wr.SCOPE_SESSION);*/
@@ -80,17 +91,14 @@ public class IndexController extends HttpServlet{
 	
 		wr.setAttribute("userId",id , wr.SCOPE_SESSION);
 			wr.setAttribute("auth", true, WebRequest.SCOPE_SESSION);
-			Map msg=new HashMap<>();
-			msg.put("mode","login");
-			msg.put("actor", mapp);
-			/*if(!sessions.containsKey(id)) {*/
-			service.sendAll(msg);
-			/*}*/
+			
+			
+			
 			
 			return "redirect:index.do";
 		}else {
 			/*return "redirect:index.do"; */
-			wr.setAttribute("err", true, WebRequest.SCOPE_REQUEST);
+			
 			return "admin/index"; 
 		}
 	}
@@ -150,7 +158,9 @@ public class IndexController extends HttpServlet{
 			sendme.put("sendid",sender );
 			
 			int i=adminDao.addaddmessage(ma);
+			if(sender!=null) {
 			service.sendOne(sendme,receiveid );;
+			}
 			return "main";
 		}catch(Exception e){
 			e.printStackTrace();
@@ -190,16 +200,28 @@ public class IndexController extends HttpServlet{
 			int no =Integer.parseInt(map.get("no").toString());
 			
 			
-			System.out.println("num¾Æ"+no);
+			System.out.println("numï¿½ï¿½"+no);
 			
+			Map msg =adminDao.receivemsg(no);
+			
+			modelmap.put("msg", msg);
+			
+			if(msg.get("CHOICE").toString().equals("0")) {
 				adminDao.setchoice(no);
+			}
 				
-				Map msg =adminDao.receivemsg(no);
-				
-				modelmap.put("msg", msg);
 				
 			
 			return "msgg";
+		}
+		
+		@GetMapping("logout.do")
+		public String logout(WebRequest wr) {
+			String id= (String)wr.getAttribute("userId", wr.SCOPE_SESSION);
+			/*sessions.get(id).invalidate();*/
+			sessions.remove(id);
+			wr.removeAttribute("auth", wr.SCOPE_SESSION);
+			return "redirect:index.do";
 		}
 		
 		

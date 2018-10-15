@@ -1,4 +1,4 @@
-package controllers;
+/*package controllers;
 
 import java.io.IOException;
 
@@ -21,3 +21,4 @@ public class Logout extends HttpServlet{
 	resp.sendRedirect(req.getContextPath()+"/index.do");
 	}
 }
+*/

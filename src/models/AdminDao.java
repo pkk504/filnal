@@ -73,7 +73,7 @@ public class AdminDao {
 	}
 	
 	public int setchoice (int no) {
-		return template.selectOne("adminadd.setchoice",no);
+		return template.update("adminadd.setchoice",no);
 	}
 	
 	

@@ -14,8 +14,8 @@
 		<li class="nav-item"><a class="nav-link" href="${pageContext.servletContext.contextPath }/send.do"> <span
 				data-feather="shopping-cart"></span> 메일작성
 		</a></li>
-		<li class="nav-item"><a class="nav-link" href="#"> <span
-				data-feather="users"></span> Customers
+		<li class="nav-item"><a class="nav-link" href="${pageContext.servletContext.contextPath }/chat/room.do"> <span
+				data-feather="users"></span> 채팅
 		</a></li>
 	</ul>
 	<h6
@@ -53,13 +53,14 @@
 			var obj = JSON.parse(evt.data);
 			switch(obj.mode) {
 			case "login":
-				console.log("zzz"+obj.actor.NAME);
+				
 				loginAlertHandle(obj);
 				break;
 			case "erlogin":
 				
 				errLoginHandle(obj);
 			case "send":
+				
 				sendmessageHandle(obj);
 			
 			
@@ -85,6 +86,7 @@
 			html += "<span aria-hidden=\"true\">&times;</span>";
 			html += "</div>";
 			document.getElementById("alert").innerHTML += html;
+			document.getElementById("alert").id="";
 		}
 		
 		var sendmessageHandle =function(obj){

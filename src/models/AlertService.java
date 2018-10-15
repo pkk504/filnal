@@ -127,11 +127,13 @@ public class AlertService {
 		}
 	}
 	
-/*	public void sendSome(String txt,String... target) {
+	public void sendSome(String txt,String... target) {
 		TextMessage msg = new TextMessage(txt);
 		for(int i=0; i<list.size(); i++) {
 			WebSocketSession ws=list.get(i);
 			String userId =(String)ws.getAttributes().get("userId");
+			
+			for(int ii=0;ii<target.length;ii++) {
 			if(userId.equals(target)) {
 				try {
 					ws.sendMessage(msg);
@@ -143,7 +145,8 @@ public class AlertService {
 			}
 		
 		}
-	}*/
+		}
+	}
 	
 	
 	
@@ -157,10 +160,10 @@ public class AlertService {
 	}
 	
 	
-	/*public void sendSome(Map map) {
+	public void sendSome(Map map,String...targer) {
 		sendSome(gson.toJson(map));
 	}
-	*/
+	
 	
 }
 

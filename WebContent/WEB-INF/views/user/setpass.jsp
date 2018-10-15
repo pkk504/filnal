@@ -39,20 +39,37 @@
 			
 			
 		<label for="inputPassword" class="sr-only">pass</label> 
-		<input type="password" id="inputEmail" class="form-control"
-			placeholder="변경할 패스워드" required autofocus name="pass1"> 
+		<input type="password"  class="form-control"
+			placeholder="변경할 패스워드" required autofocus name="pass1" id="aaa"> 
 			
 			<label for="inputPassword" class="sr-only">Password</label> 
 			<input type="password" id="inputPassword" class="form-control"
-			placeholder="변경할 패스워드 확인" required name="pass2">
+			placeholder="변경할 패스워드 확인" required name="pass2" onkeyup="keyup(this);">
+			
+			
+		
 		<!-- <div class="checkbox mb-3">
 			<label> <input type="checkbox" value="remember-me">
 				Remember me
 			</label>
 		</div> -->
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
-			in</button>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">변경</button>
 		<p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
 	</form>
+	
+	<script >
+	
+	var keyup =function(a){
+		var b= document.getElementById("aaa").value;
+		console.log(b);
+		console.log("a="+a.value);
+		
+		
+		
+	}
+	
+	
+	
+	</script>
 </body>
 </html>
