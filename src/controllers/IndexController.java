@@ -235,6 +235,20 @@ public class IndexController extends HttpServlet{
 		
 		
 		}
+
+/*for(int i= 0;i<li.size();i++) {
+	if(!li.contains(sockets.get(i).getAttributes().get("userId"))){
+		service.sendAll(nochat);
+	}else {
+try {
+sockets.get(i).sendMessage(msg);
+
+}catch (Exception e) {
+e.printStackTrace();
+}
+
+}
+}*/
 	
 		
 	

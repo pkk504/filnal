@@ -1,4 +1,4 @@
-package controllers;
+/*package controllers;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,57 +42,92 @@ public class ChatSocketcontroller extends TextWebSocketHandler{
 	
 	
 		
-	/*	Map <String, Object> attrs=session.getAttributes();
+		Map <String, Object> attrs=session.getAttributes();
 		// 이 기능을 사용하는 방법을 알아야한다.
-		System.out.println(session.getId()+" z/z "+attrs);*/
+		System.out.println(session.getId()+" z/z "+attrs);
 		
 	
 	}
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		
-		
-		Map mapp=new HashMap();
-		List<String> li=new ArrayList<>();	
-	for(int i=0; i<sockets.size();i++) {
-			
-			li.add((String) service.list.get(i).getAttributes().get("userId"));
-			/*System.out.println("호로록="+service.list.get(i).getAttributes().get("userId"));
-			System.out.println(sockets.get(i).getAttributes().get("userId"));*/
+		String[] qq ="{fff,aaa}".split(",");
+		for(int iii=0;iii<qq.length;iii++) {
+			System.out.println(qq[iii]);
 		}
-
-	
-	
-	
+		
+		
+		//===========
 		String got=message.getPayload();
 		Map aa=gson.fromJson(got, Map.class);
 		Date time =new Date(System.currentTimeMillis());
 		String gettime=time.toString();
 		System.out.println(gettime);
+		for(int i=0; i<service.list.size();i++) {
+			
+			Map mapp=new HashMap();
+			Map nochat =new HashMap();
+			service.list.get(i).getAttributes().get("user");
+			for(int ii=0;ii<sockets.size();ii++) {
+				sockets.get(ii).getAttributes().get("userId");
+				if(!service.list.get(i).getAttributes().get("userId").equals(sockets.get(ii).getAttributes().get("userId"))) {
+					nochat.put("mode", "nochat");
+					nochat.put("nochatsend", service.list.get(i).getAttributes().get("userId"));
+					service.sendOne(nochat, (String)service.list.get(i).getAttributes().get("userId"));
+				}
+				System.out.println(sockets.get(ii).getAttributes().get("userId"));
+				System.out.println("호로록="+service.list.get(i).getAttributes().get("userId"));
+			}
+			
+		}
+		
+		List li=new ArrayList<>();
+			for(int i=0; i<service.list.size();i++) {
+		li.add(i, service.list.get(i).getAttributes().get("userId"));
+		
+	
+	
+			
+			System.out.println(sockets.get(i).getAttributes().get("userId"));
+			System.out.println("호로록="+service.list.get(i).getAttributes().get("userId"));
+		}
+			System.out.println("li 사이즈 = "+li.size());
+		
+	
+		
 		aa.put("time",gettime);
-		System.out.println(aa.toString());
-		String toto=gson.toJson(aa);
-		TextMessage msg=new TextMessage(toto);
+		
 		Map nochat =new HashMap();
 		nochat.put("mode", "nochat");
 		nochat.put("pass", "on");
 		
-		for(int i=0;i<li.size();i++) {
-			/*if(!li.get(i).contains(sockets.get(i).getAttributes().get("userId"))) {*/
-			String id=(String) sockets.get(i).getAttributes().get("userId");
-			if(!li.get(i).contains(id)) {	
-			service.sendOne(nochat,li.get(i));
-			}else {
-			try {
-			sockets.get(i).sendMessage(msg);
 		
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		}
+		
+		System.out.println(aa.toString());
+		String toto=gson.toJson(aa);
+		System.out.println("toto ="+toto);
+		System.out.println("소켓사이즈 = "+sockets.size());
+		TextMessage msg=new TextMessage(toto);
+		
+		for(int i= 0;i<li.size();i++) {
+			if(!li.contains(session.getAttributes().get("userId"))){
+				service.sendOne(nochat,(String)sockets.get(i).getAttributes().get("userId"));
+			}
+		
+			try {
+				sockets.get(i).sendMessage(msg);
+			
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		
 		}
 	}
-	/*Map <String, Object> attrs=session.getAttributes();
+	
+	
+	
+	
+	Map <String, Object> attrs=session.getAttributes();
 	attrs.get("ID");
 	String got=message.getPayload();
 	Map aa=gson.fromJson(got, Map.class);
@@ -112,7 +147,7 @@ public class ChatSocketcontroller extends TextWebSocketHandler{
 	}
 	
 	
-	*/
+	
 	
 	
 	
@@ -123,3 +158,4 @@ public class ChatSocketcontroller extends TextWebSocketHandler{
 	
 	
 }
+*/

@@ -42,6 +42,7 @@
 	
 	var publicHandle = function(obj) {
 		var txt = obj.text;
+		console.log(txt);
 		var html = "<div class=\"alert alert-secondary\" role=\"alert\" style=\"padding:3px; margin-bottom:3px;\">";
 		html += obj.sendid+" : "+obj.text +"  / <small><b>"+obj.time+"</b></small>";
 		html +="</div>";

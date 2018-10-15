@@ -62,11 +62,24 @@
 			case "send":
 				
 				sendmessageHandle(obj);
+				
+			case "nochat":
+				nochatmsgHandle(obj);
 			
 			
 			
 			}
 		};
+		
+		var nochatmsgHandle=function(obj){
+			var html = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">";
+			html += "<strong>【로그인】</strong><br/>" + "(새로운 채팅이 활성화 되었습니다.)";
+			html += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">";
+			html += "<span aria-hidden=\"true\">&times;</span>";
+			html += "</div>";
+			document.getElementById("alert").innerHTML += html;
+			
+		}
 		
 		
 		var loginAlertHandle = function(obj) {
