@@ -30,6 +30,7 @@ public class AlertController extends TextWebSocketHandler{
 		Map <String, Object> attrs=session.getAttributes();
 		// 이 기능을 사용하는 방법을 알아야한다.
 		System.out.println(session.getId()+" / "+attrs);
+		System.out.println(service.size());
 	
 	}
 	

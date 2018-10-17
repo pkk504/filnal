@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div
@@ -17,13 +17,15 @@
 			<span data-feather="calendar">전체채팅</span> 
 				<span data-feather="calendar">부서채팅</span> 
 		</button> -->
-		
-<select name="job">
-    <option value="">직업선택</option>
-    <option value="학생">학생</option>
-    <option value="회사원" selected="selected">회사원</option>
-    <option value="기타">기타</option>
-</select>
+		<div class="btn-group" role="group">
+    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Dropdown
+    </button>
+    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+      <a class="dropdown-item" href="#" >전체채팅</a>
+      <a class="dropdown-item" href="#" >인사부</a>
+    </div>
+  </div>
 	</div>
 	
 </div>
@@ -81,3 +83,4 @@
 	
 </script>
 
+ --%>

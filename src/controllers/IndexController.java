@@ -50,7 +50,9 @@ public class IndexController extends HttpServlet{
 	@PostMapping("login.do")
 	public String indexgetHandl(@RequestParam Map map,WebRequest wr,HttpSession session) {
 		Map mapp=adminDao.selectIdPass(map);
+		
 		String id=wr.getParameter("id");
+		Map getall=adminDao.getAllEmployee(id);
 		String pass=wr.getParameter("pass");
 		System.out.println("id�� "+id);
 		wr.setAttribute("userId",id , wr.SCOPE_SESSION);
@@ -66,11 +68,12 @@ public class IndexController extends HttpServlet{
 		if(mapp!=null) {
 			Map msgg = new HashMap();
 			msgg.put("mode", "erlogin");
-			msgg.put("actor", id);
+			msgg.put("actor", getall);
+			
 			
 			Map msg=new HashMap<>();
 			msg.put("mode","login");
-			msg.put("actor", mapp);
+			msg.put("actor", getall);
 			
 			if(sessions.containsKey(id)) {
 				sessions.get(id).invalidate();
@@ -87,7 +90,7 @@ public class IndexController extends HttpServlet{
 			
 			//======================
 		/*wr.setAttribute("user", map, wr.SCOPE_SESSION);*/
-		wr.setAttribute("user",mapp , wr.SCOPE_SESSION);
+		wr.setAttribute("user",getall , wr.SCOPE_SESSION);
 	
 		wr.setAttribute("userId",id , wr.SCOPE_SESSION);
 			wr.setAttribute("auth", true, WebRequest.SCOPE_SESSION);

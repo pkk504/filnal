@@ -46,6 +46,12 @@ select*from position
        update finalmessage set choice = 1 where no=#{no}  
       </update>
       
+      <select id="getAllEmployee" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select t.*, position.pname from
+			(select employee.*, department.dname from employee join department on employee.did = department.did ) t 
+		join position on t.pid = position.pid where id=#{id }
+	</select>
+      
       
 	<!-- 	<select id ="getidpass" resultType="java.util.HashMap" parameterType="java.lang.String">
 		 select id,pass from account where id like #{id}

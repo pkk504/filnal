@@ -59,13 +59,14 @@
 			case "erlogin":
 				
 				errLoginHandle(obj);
+				break;
 			case "send":
 				
 				sendmessageHandle(obj);
-				
+				break;
 			case "nochat":
 				nochatmsgHandle(obj);
-			
+				break;
 			
 			
 			}
@@ -94,7 +95,7 @@
 		
 		var errLoginHandle =function(obj){
 			var html = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">";
-			html += "<strong>【로그아웃】</strong><br/>" + obj.actor+"(님이 다른 페이지에서 로그인을 시도하셨습니다.)";
+			html += "<strong>【로그아웃】</strong><br/>" + obj.actor.NAME+"(님이 다른 페이지에서 로그인을 시도하셨습니다.)";
 			html += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">";
 			html += "<span aria-hidden=\"true\">&times;</span>";
 			html += "</div>";

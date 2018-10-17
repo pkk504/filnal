@@ -76,5 +76,10 @@ public class AdminDao {
 		return template.update("adminadd.setchoice",no);
 	}
 	
+	public Map getAllEmployee(String id) {
+		
+		return template.selectOne("adminadd.getAllEmployee",id);
+	}
+	
 	
 }
