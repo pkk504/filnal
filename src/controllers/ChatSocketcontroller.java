@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 
 import models.AdminDao;
 import models.AlertService;
+import models.Mongochat;
 
 @Controller
 public class ChatSocketcontroller extends TextWebSocketHandler{
@@ -28,6 +29,9 @@ public class ChatSocketcontroller extends TextWebSocketHandler{
 	
 	@Autowired
 	AlertService service;
+	
+	@Autowired
+	Mongochat mongochat;
 	
 	List<WebSocketSession> sockets;
 	
@@ -59,10 +63,9 @@ public class ChatSocketcontroller extends TextWebSocketHandler{
 	for(int i=0; i<service.size();i++) {
 			
 			li.add((String) service.list.get(i).getAttributes().get("userId"));
-			/*System.out.println("�샇濡쒕줉="+service.list.get(i).getAttributes().get("userId"));
-			System.out.println(sockets.get(i).getAttributes().get("userId"));*/
+			
 		}
-List<String> lii=new ArrayList<>();
+List<String> lii=new ArrayList<>();//소켓사이즈(아이디)
 	for(int i=0;i<sockets.size();i++) {
 		lii.add((String)sockets.get(i).getAttributes().get("userId"));
 	}
@@ -74,17 +77,20 @@ List<String> lii=new ArrayList<>();
 		
 		Date time =new Date(System.currentTimeMillis());
 		String gettime=time.toString();
-		System.out.println(gettime);
+		
 		aa.put("time",gettime);
 		System.out.println(aa.toString());
 		String toto=gson.toJson(aa);
 		TextMessage msg=new TextMessage(toto);
 		Map nochat =new HashMap();
 		if(aa.get("mode").equals("public")) {
+			
+			aa.put("id", "public");
+			
+			mongochat.chatinsert(aa);
 		nochat.put("mode", "nochat");
 		nochat.put("pass", "on");
-		System.out.println("소켓사이즈"+sockets.size());
-		System.out.println("li사이즈"+li.size());
+	
 		
 		for(int i=0;i<li.size();i++) {
 			/*if(!li.get(i).contains(sockets.get(i).getAttributes().get("userId"))) {*/

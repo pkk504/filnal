@@ -14,7 +14,7 @@
 		<li class="nav-item"><a class="nav-link" href="${pageContext.servletContext.contextPath }/send.do"> <span
 				data-feather="shopping-cart"></span> 메일작성
 		</a></li>
-		<li class="nav-item"><a class="nav-link" href="${pageContext.servletContext.contextPath }/chat/room.do"> <span
+		<li class="nav-item"><a class="nav-link" href="${pageContext.servletContext.contextPath }/chat/room.do?param=public"> <span
 				data-feather="users"></span> 채팅
 		</a></li>
 	</ul>

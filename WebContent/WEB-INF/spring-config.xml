@@ -3,9 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
 	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-2.0.xsd">
 	<!-- 
 		DispatcherServlet이 요청을 받아서 이 설정파일에 등록된 빈(스프링에 의해서 관리되는 객체)
 		들을 통해서	요청을 처리하거나 응답을 만들어내게 된다.
@@ -135,6 +137,13 @@
 	
 	
 	</websocket:handlers>
+	
+	<!--  -->	
+	<mongo:mongo-client host="54.180.8.152" port="51249"/>
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoClient" ref="mongoClient"/>
+		<constructor-arg name="databaseName" value="dev"/>
+	</bean>
 	
 </beans>
 

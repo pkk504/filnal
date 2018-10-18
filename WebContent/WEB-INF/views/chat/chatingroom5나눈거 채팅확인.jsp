@@ -24,7 +24,7 @@
     </button>
     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
       <a class="dropdown-item" href="${pageContext.servletContext.contextPath }/chat/room.do?param=public">전체채팅</a>
-      <a class="dropdown-item" href="${pageContext.servletContext.contextPath }/chat/room.do?param=HumanResources">인사부</a>
+      <a class="dropdown-item" href="${pageContext.servletContext.contextPath }/chat/room.do?param=ho">인사부</a>
     </div>
   </div>
 	</div>
@@ -61,8 +61,7 @@
 		case "public":
 			publicHandle(obj);
 			break;
-		case "HumanResources" :
-			
+		
 		}
 	} 
 	

@@ -18,22 +18,21 @@
 				<span data-feather="calendar">부서채팅</span> 
 		</button> -->
 		
-<div class="btn-group" role="group">
-    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      부서선택
-    </button>
-    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-      <a class="dropdown-item" href="${pageContext.servletContext.contextPath }/chat/room.do?param=public">전체채팅</a>
-      <a class="dropdown-item" href="${pageContext.servletContext.contextPath }/chat/room.do?param=HumanResources">인사부</a>
-    </div>
-  </div>
+		<form  action="${pageContext.servletContext.contextPath}/chat/room.do">
+<select name="job" id="modeee" onclick="modeclick(this);">
+    <option value="public">전체채팅</option>
+    <option value="">인사부</option>
+    <option value="회사원" selected="selected">회사원</option>
+    <option value="기타">기타</option>
+</select>
+</form>
 	</div>
 	
 	
 </div>
 
 
-<h4>Chat Room <small id="ho">(${depart })</small></h4>
+<h4>Chat Room <small>(All Departments)</small></h4>
 <div style="height: 520px; overflow-y: scroll; " id="chatView">
 	<c:forEach var="v" items="${publicchatAll }">
 		
@@ -61,8 +60,6 @@
 		case "public":
 			publicHandle(obj);
 			break;
-		case "HumanResources" :
-			
 		}
 	} 
 	
