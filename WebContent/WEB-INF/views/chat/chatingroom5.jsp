@@ -62,7 +62,7 @@
 			publicHandle(obj);
 			break;
 		case "HumanResources" :
-			HumanResourceshandle(obj);
+			HumanResourceshandle(onj);
 			break;
 		}
 	} 
@@ -97,33 +97,23 @@
 	
 	document.getElementById("input").onchange= function() {
 		console.log(this.value);
-		var msg=null;
+		var msg;
 		var aa="HumanResources";
-		var bb="${depart}";
-		var cc="public";
-		
-		console.log(aa==bb);
-		console.log(bb==cc);
-		console.log(aa);
-		console.log(cc);
-		if(aa==bb){
+		if(${depart}==aa){
 			 msg = {
 					"mode":"HumanResources",
 					"text":this.value,
 					"sendid":"${sessionScope.userId }"
 				};
-			 chatws.send(JSON.stringify(msg));
-			 this.value=""; 
-				
-		}else if(bb==cc){
+		}else{
 		 msg = {
 			"mode":"public",
 			"text":this.value,
 			"sendid":"${sessionScope.userId }"
 		}
+		}
 		chatws.send(JSON.stringify(msg));
 		 this.value=""; 
-		}
 	};
 	
 	

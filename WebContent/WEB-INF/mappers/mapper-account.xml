@@ -51,6 +51,10 @@ select*from position
 			(select employee.*, department.dname from employee join department on employee.did = department.did ) t 
 		join position on t.pid = position.pid where id=#{id }
 	</select>
+	
+	   <select id="getdepartAll" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+		select * from(EMPLOYEE left join department on EMPLOYEE.DID = department.DID  )where EMPLOYEE.DID=#{num}
+	</select>
       
       
 	<!-- 	<select id ="getidpass" resultType="java.util.HashMap" parameterType="java.lang.String">

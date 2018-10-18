@@ -31,21 +31,21 @@ public class Chatingcontroller {
 	
 	
 	@GetMapping("/room.do")
-	public String charRoomHandler(ModelMap map,@RequestParam Map mapp) {
+	public String charRoomHandler(ModelMap map,@RequestParam Map mapp,WebRequest wr) {
 		/*Map map =new HashMap();
 		map.put("mode", "dodo");
 		map.put("ddd", 321);
 		service.sendAll(map);*/
-		String id=(String)mapp.get("param");
+		String id=(String)wr.getParameter("param");
 		System.out.println(id);
 		
 		if(id.equals("HumanResources")) {
-			List<Map> li= mongochat.getpublicchat(id);
+			List<Map> li= mongochat.getHumanResourceschat("Human");
 			
 			System.out.println(li);
 		map.put("publicchatAll", li);
-		map.put("depart", id);
-		}else {
+		map.put("depart", "HumanResources");
+		}else if(id.equals("public")){
 		List<Map> li= mongochat.getpublicchat("public");
 		
 		System.out.println(li);

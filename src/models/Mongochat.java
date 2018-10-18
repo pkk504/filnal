@@ -36,6 +36,19 @@ public class Mongochat {
 	
 	
 	
+	public boolean chatHumanResourcesinsert(Map map) {
+		try {
+			Map rst=template.insert(map,"HumanResourceschat");
+		 
+			return rst != null;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+	
+	
 
 	public List<Map> getHumanResourceschat(String id){
 		

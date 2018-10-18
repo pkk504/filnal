@@ -3,6 +3,7 @@ package controllers;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -70,6 +71,7 @@ List<String> lii=new ArrayList<>();//소켓사이즈(아이디)
 		lii.add((String)sockets.get(i).getAttributes().get("userId"));
 	}
 	
+	
 		String got=message.getPayload();
 		Map aa=gson.fromJson(got, Map.class);
 		
@@ -79,9 +81,9 @@ List<String> lii=new ArrayList<>();//소켓사이즈(아이디)
 		String gettime=time.toString();
 		
 		aa.put("time",gettime);
-		System.out.println(aa.toString());
-		String toto=gson.toJson(aa);
-		TextMessage msg=new TextMessage(toto);
+		System.out.println("aa의 총"+aa.toString());
+		/*String toto=gson.toJson(aa);
+		TextMessage msg=new TextMessage(toto);*/
 		Map nochat =new HashMap();
 		if(aa.get("mode").equals("public")) {
 			
@@ -90,7 +92,8 @@ List<String> lii=new ArrayList<>();//소켓사이즈(아이디)
 			mongochat.chatinsert(aa);
 		nochat.put("mode", "nochat");
 		nochat.put("pass", "on");
-	
+		String toto=gson.toJson(aa);
+		TextMessage msg=new TextMessage(toto);
 		
 		for(int i=0;i<li.size();i++) {
 			/*if(!li.get(i).contains(sockets.get(i).getAttributes().get("userId"))) {*/
@@ -107,7 +110,34 @@ List<String> lii=new ArrayList<>();//소켓사이즈(아이디)
 		
 		sockets.get(i).sendMessage(msg);
 		}
+	}else if(aa.get("mode").equals("HumanResources")){
+		aa.put("id", "Human");
+		String toto=gson.toJson(aa);
+		TextMessage msghuman=new TextMessage(toto);
+		int num =1300;
+		List<Map> human=adminDao.getdepartAll(num);
+		List<String> humanlist=new LinkedList<>();
+		System.out.println("휴먼리스트 ="+humanlist);
+		for(int i=0;i<human.size();i++) {
+			humanlist.add((String)human.get(i).get("ID"));
+			System.out.println(humanlist.add((String)human.get(i).get("ID")));
+		}
+		mongochat.chatHumanResourcesinsert(aa);
+		
+		for(int i=0;i<sockets.size();i++) {
+			String id=(String)sockets.get(i).getAttributes().get("userId");
+			if(humanlist.contains(id)) {
+				sockets.get(i).sendMessage(msghuman);
+				System.out.println("그룹 사이즈 ="+sockets.size());
+			}
+		}
 	}
+		
+		
+		
+		
+		
+		
 	}
 	/*Map <String, Object> attrs=session.getAttributes();
 	attrs.get("ID");
@@ -131,12 +161,12 @@ List<String> lii=new ArrayList<>();//소켓사이즈(아이디)
 	
 	*/
 	
-	
-	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		sockets.remove(session);
 	}
+	
+	
 	
 	
 }

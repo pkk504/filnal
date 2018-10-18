@@ -81,5 +81,9 @@ public class AdminDao {
 		return template.selectOne("adminadd.getAllEmployee",id);
 	}
 	
+	public List<Map> getdepartAll(int num){
+		return template.selectList("adminadd.getdepartAll",num);
+	}
+	
 	
 }
